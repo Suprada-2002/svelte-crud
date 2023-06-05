@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: rgb(120, 122, 122);
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.profile {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ color: white;
+ background-color: rgb(107, 26, 107);
+}
