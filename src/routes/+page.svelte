@@ -1,30 +1,26 @@
 <script>
   import { user, isLoggedIn } from "../store";
   import {onSnapshot,
-    collection,} from 'firebase/firestore';
+    collection,
+    getDocs} from 'firebase/firestore';
   import {db} from '../Firebase';
   import {onMount} from "svelte";
 
-  
-  let blogs=[];
-
-  const fetchBlog = onSnapshot(collection(db, "blogs"), 
-  (querySnapshot) => {
-    blogs = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id:doc.id,
-    }));
-    console.log("entering into fetch function")
-    console.log(blogs);
-  },(err) => {
-    console.log(err);
-  })
+  let blogs = [];
+  const collRef = collection(db, "blogs");
 
   onMount(() => {
-    console.log("on mount")
-    fetchBlog();
+    console.log("on mount");
+    onSnapshot(collRef, (querySnapshot) => {
+    let fbBlogs = [];
+    querySnapshot.forEach((doc) => {
+      let blog = {...doc.data(), id:doc.id}
+      fbBlogs = [blog, ...fbBlogs];
+    })
+    console.table(fbBlogs);
+    blogs = fbBlogs;
   })
-
+});
 </script>
 
 {#if $isLoggedIn}
@@ -38,7 +34,16 @@
 
  <div class="showBlogs">
     {#each blogs as blog}
+    <div class="blog">
       <h4>{blog.title}</h4>
       <p>{blog.content}</p>
+    </div>
     {/each}
  </div>
+
+ <style>
+  .blog {
+    padding: 10px 0px;
+    border-bottom: 2px solid black;
+  }
+ </style>
