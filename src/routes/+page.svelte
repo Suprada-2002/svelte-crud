@@ -1,13 +1,20 @@
 <script>
   import { user, isLoggedIn } from "../store";
-  import {onSnapshot,
-    collection,
-    getDocs} from 'firebase/firestore';
+  import {onSnapshot,collection, deleteDoc, doc} from 'firebase/firestore';
   import {db} from '../Firebase';
   import {onMount} from "svelte";
 
   let blogs = [];
   const collRef = collection(db, "blogs");
+
+  let deleteBlog = async (id) => {
+    try{
+      await deleteDoc(doc(db, "blogs", id));
+    }catch(error) {
+      alert("an error occured!!");
+      console.log(error);
+    }
+  };
 
   onMount(() => {
     console.log("on mount");
@@ -37,6 +44,10 @@
     <div class="blog">
       <h4>{blog.title}</h4>
       <p>{blog.content}</p>
+      <div class="buttons">
+        <button>Edit</button>
+        <button on:click={deleteBlog(blog.id)} >Delete</button>
+      </div>
     </div>
     {/each}
  </div>
