@@ -8,6 +8,7 @@
   let blogs = [];
   const collRef = collection(db, "blogs");
 
+  //deleting blog
   let deleteBlog = async (id) => {
     try{
       await deleteDoc(doc(db, "blogs", id));
@@ -17,6 +18,7 @@
     }
   };
 
+  //send data to edit data
   const editData = (currentBlog) => {
      $currentBlogData.title = currentBlog.title;
      $currentBlogData.content = currentBlog.content;
@@ -40,6 +42,7 @@
 });
 </script>
 
+<div class="mainpage container">
 {#if $isLoggedIn}
  <div class="profile">
     <h4>Current Logged In user:</h4>
@@ -54,17 +57,31 @@
     <div class="blog">
       <h4>{blog.title}</h4>
       <p>{blog.content}</p>
+      {#if $isLoggedIn}
       <div class="buttons">
-        <button on:click={editData(blog)}>Edit</button>
-        <button on:click={deleteBlog(blog.id)} >Delete</button>
+        <button class="button" on:click={editData(blog)}>Edit</button>
+        <button class="button" on:click={deleteBlog(blog.id)} >Delete</button>
       </div>
+      {/if}
     </div>
     {/each}
  </div>
+</div>
 
  <style>
   .blog {
     padding: 10px 0px;
-    border-bottom: 2px solid black;
+  }
+
+  h4{
+    color: rgb(75, 11, 75);
+  }
+
+  .buttons{
+    padding-top: 10px;
+  }
+  .button{
+    padding: 3px 5px;
+    cursor: pointer;
   }
  </style>

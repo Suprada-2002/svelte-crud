@@ -59,7 +59,7 @@
   }
 </script>
 
-<div class="form-content">
+<div class="form-content container">
     <form on:submit|preventDefault={handleSubmit} >
         <div class="firstInp">
             <label for="title" id="title" >Title</label>
@@ -80,11 +80,11 @@
             />
         </div>
     </form>
-        <div class="button">
+        <div class="buttons">
             {#if isEditable}
-            <button on:click={updateBlog} >update</button>
+            <button class="button" on:click={updateBlog} >update</button>
             {:else}
-            <button on:click={addBlog} >Save</button>
+            <button class="button" on:click={addBlog} >Save</button>
             {/if}
         </div>
    
@@ -93,14 +93,6 @@
 
 
 <style>
-    /* .form-content{
-        display: grid;
-        place-items:center;
-    }
-    form{
-        display: flex;
-        flex-direction: column;
-    } */
     .input{
         width: 50%;
     }
