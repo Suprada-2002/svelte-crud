@@ -1,8 +1,9 @@
 <script>
-  import { user, isLoggedIn } from "../store";
+  import { user, isLoggedIn, currentBlogData , isEditable} from "../store";
   import {onSnapshot,collection, deleteDoc, doc} from 'firebase/firestore';
   import {db} from '../Firebase';
   import {onMount} from "svelte";
+  import { goto } from '$app/navigation';
 
   let blogs = [];
   const collRef = collection(db, "blogs");
@@ -14,6 +15,15 @@
       alert("an error occured!!");
       console.log(error);
     }
+  };
+
+  const editData = (currentBlog) => {
+     $currentBlogData.title = currentBlog.title;
+     $currentBlogData.content = currentBlog.content;
+     $currentBlogData.id = currentBlog.id;
+     $isEditable = true;
+     goto("/create");
+    //goto(`/create?id=${currentBlog.id}`);
   };
 
   onMount(() => {
@@ -45,7 +55,7 @@
       <h4>{blog.title}</h4>
       <p>{blog.content}</p>
       <div class="buttons">
-        <button>Edit</button>
+        <button on:click={editData(blog)}>Edit</button>
         <button on:click={deleteBlog(blog.id)} >Delete</button>
       </div>
     </div>

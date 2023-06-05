@@ -1,41 +1,35 @@
 <script>
     import {db} from '../../Firebase';
+    import {currentBlogData, isEditable} from '../../store'
     import {
-    onSnapshot,
     collection,
     addDoc,
-    deleteDoc,
     doc,
     updateDoc,
-    QuerySnapshot,
   } from "firebase/firestore";
-  import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
 
   let blog = {
+    id:"",
     title: "",
     content: ""
   };
-
-  let elementInput;
-  let editStatus = false;
-  let currentId = "";
+  blog.id = $currentBlogData.id;
+  blog.title = $currentBlogData.title;
+  blog.content = $currentBlogData.content;
 
   let handleSubmit = () => {
-    if(!blog.title) {
+    if(blog.title === "") {
         alert("add a title !!");
         return;
+    }else if(blog.content === ""){
+        alert("add some content !!");
+        return;
     }
-
-    // if(!editStatus){
-    //     addBlog();
-    // }else{
-    //     updateBlog();
-    //     editStatus = false;
-    // }
     blog = { title: "" , content: "" };
-    //inputElement.focus();
   };
 
+  //adding new blog
   let addBlog = async() => {
     try{
         await addDoc(collection(db, "blogs"), {
@@ -47,14 +41,28 @@
             console.log(error)
         }
   };
-  let updateBlog = () => {};
 
+  //updating blog data
+  const updateBlog = async() => {
+    try{
+        await updateDoc(doc(db, "blogs", blog.id), blog);
+    }catch(error){
+        console.log(error);
+    }
+
+    $isEditable = false;
+    $currentBlogData.title = "";
+    $currentBlogData.content = "";
+    $currentBlogData.id = "";
+    blog = { title: "" , content: "" };
+    goto("/");
+  }
 </script>
 
 <div class="form-content">
     <form on:submit|preventDefault={handleSubmit} >
         <div class="firstInp">
-            <label for="title">Title</label>
+            <label for="title" id="title" >Title</label>
             <input 
             type="text"
             bind:value={blog.title}
@@ -63,7 +71,7 @@
             />
        </div>
        <div class="secondInp">
-            <label for="content">Content</label>
+            <label for="content" id="content" >Content</label>
             <input 
             type="text"
             bind:value={blog.content}
@@ -71,10 +79,15 @@
             class="input secondInp"
             />
         </div>
-        <div class="button">
-            <button on:click={addBlog} >Save</button>
-        </div>
     </form>
+        <div class="button">
+            {#if isEditable}
+            <button on:click={updateBlog} >update</button>
+            {:else}
+            <button on:click={addBlog} >Save</button>
+            {/if}
+        </div>
+   
 </div>
 
 
