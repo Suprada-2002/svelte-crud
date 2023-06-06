@@ -8,6 +8,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@rollup/plugin-replace": "^5.0.2",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
 		"svelte": "^3.54.0",
@@ -15,6 +16,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"dotenv": "^16.1.4",
 		"firebase": "^9.22.1"
 	}
 }
