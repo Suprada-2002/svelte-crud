@@ -56,7 +56,6 @@
     {#each blogs as blog}
     <div class="blog">
       <h4>{blog.title}</h4>
-      <p>{blog.content}</p>
       {#if $isLoggedIn}
       <div class="buttons">
         <button class="button" on:click={editData(blog)}>Edit</button>

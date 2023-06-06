@@ -17,10 +17,10 @@ let app;
 if(browser){
 if(getApps().length === 0){
   app = initializeApp(firebaseConfig);
-}else{
+}else {
   getApp();
-}}
-
+}
+}
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);

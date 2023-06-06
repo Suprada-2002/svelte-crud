@@ -24,7 +24,7 @@
   </div>
   <ul>
     <li><a href="/">Home</a></li>
-    <li><a href="/">Portfolio</a></li>
+    <li><a href="https://portfolio2-0-mu-nine.vercel.app/">Portfolio</a></li>
     {#if $isLoggedIn}
     <li><button class="button" on:click={logout}>Logout</button></li>
     {:else}

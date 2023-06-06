@@ -14,9 +14,11 @@
     title: "",
     content: ""
   };
+ 
   blog.id = $currentBlogData.id;
   blog.title = $currentBlogData.title;
   blog.content = $currentBlogData.content;
+  
 
   let handleSubmit = () => {
     if(blog.title === "") {
@@ -26,6 +28,13 @@
         alert("add some content !!");
         return;
     }
+    if($isEditable){
+        updateBlog();
+        $isEditable = false;
+    }else{
+        addBlog();
+    }
+
     blog = { title: "" , content: "" };
   };
 
@@ -49,14 +58,13 @@
     }catch(error){
         console.log(error);
     }
-
-    $isEditable = false;
     $currentBlogData.title = "";
     $currentBlogData.content = "";
     $currentBlogData.id = "";
     blog = { title: "" , content: "" };
     goto("/");
   }
+  console.log($isEditable)
 </script>
 
 <div class="form-content container">
@@ -79,14 +87,11 @@
             class="input secondInp"
             />
         </div>
-    </form>
         <div class="buttons">
-            {#if isEditable}
-            <button class="button" on:click={updateBlog} >update</button>
-            {:else}
-            <button class="button" on:click={addBlog} >Save</button>
-            {/if}
+            <button>{#if $isEditable}Update{:else}Save{/if}</button>
         </div>
+    </form>
+      
    
 </div>
 
