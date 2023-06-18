@@ -1,2 +1,2 @@
 ## svelte-crud app
-s
+Blogging App made using Svelte.js and firebase.
