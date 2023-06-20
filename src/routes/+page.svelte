@@ -1,5 +1,5 @@
 <script>
-  import { user, isLoggedIn, currentBlogData , isEditable} from "../store";
+  import { user, isLoggedIn, currentBlogData , isEditable, showBlogId} from "../store";
   import {onSnapshot,collection, deleteDoc, doc} from 'firebase/firestore';
   import {db} from '../Firebase';
   import {onMount} from "svelte";
@@ -7,6 +7,12 @@
 
   let blogs = [];
   const collRef = collection(db, "blogs");
+
+  //show Blog on full Display
+  let showFullBlog = (blogId) => {
+    $showBlogId = blogId;
+    goto("/showBlog");
+  }
 
   //deleting blog
   let deleteBlog = async (id) => {
@@ -29,14 +35,14 @@
   };
 
   onMount(() => {
-    console.log("on mount");
+    //console.log("on mount");
     onSnapshot(collRef, (querySnapshot) => {
     let fbBlogs = [];
     querySnapshot.forEach((doc) => {
       let blog = {...doc.data(), id:doc.id}
       fbBlogs = [blog, ...fbBlogs];
     })
-    console.table(fbBlogs);
+    //console.table(fbBlogs);
     blogs = fbBlogs;
   })
 });
@@ -55,7 +61,9 @@
  <div class="showBlogs">
     {#each blogs as blog}
     <div class="blog">
-      <h4>{blog.title}</h4>
+      <h4
+       on:click={showFullBlog(blog.id)}
+      >{blog.title}</h4>
       {#if $isLoggedIn}
       <div class="buttons">
         <button class="button" on:click={editData(blog)}>Edit</button>
@@ -74,6 +82,7 @@
 
   h4{
     color: rgb(75, 11, 75);
+    cursor:pointer;
   }
 
   .buttons{

@@ -34,7 +34,7 @@
   </ul>
 </nav>
 <slot />
-<footer>
+<footer class="container">
     <p>Made with Svelte and Firebase</p>
 </footer>
 

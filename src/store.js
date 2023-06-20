@@ -14,3 +14,4 @@ export const currentBlogData = writable({
 
 export const isLoggedIn = writable(false);
 export const isEditable = writable(false);
+export const showBlogId = writable(0);

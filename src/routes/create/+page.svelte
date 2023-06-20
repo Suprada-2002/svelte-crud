@@ -45,7 +45,8 @@
             ...blog,
             createdAt: Date.now(),
         });
-        console.log("new blog addded")
+        console.log("new blog addded");
+        goto("/");
     }catch(error){
             console.log(error)
         }
