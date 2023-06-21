@@ -81,7 +81,7 @@
        </div>
        <div class="secondInp">
             <label for="content" id="content" >Content</label>
-            <input 
+            <textarea 
             type="text"
             bind:value={blog.content}
             placeholder="Enter Content"
@@ -96,15 +96,23 @@
    
 </div>
 
-
-
 <style>
-    .input{
-        width: 50%;
-    }
+.firstInp, .secondInp{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    .secondInp{
-        height: 300px;
-    }
-
+}
+.secondInp{
+    height: 60vh;
+}
+.buttons{
+    text-align: center;
+    padding: 10px 0px;
+}
+button {
+    padding: 5px 5px;
+}
 </style>
