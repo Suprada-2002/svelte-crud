@@ -20,17 +20,17 @@
 <nav class="container">
   <div class="header">
     <h1>Suprada's Blog</h1>
-    <p>may include some other people too</p>
+    <i>may include some other people too</i>
   </div>
   <ul>
     <li><a href="/">Home</a></li>
     <li><a href="https://portfolio2-0-mu-nine.vercel.app/">Portfolio</a></li>
     {#if $isLoggedIn}
     <li><button class="button" on:click={logout}>Logout</button></li>
+    <li><a href="/create">create</a></li>
     {:else}
     <li><a href="/login">Login</a></li>
     {/if}
-    <li><a href="/create">create</a></li>
   </ul>
 </nav>
 <slot />

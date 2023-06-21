@@ -49,15 +49,6 @@
 </script>
 
 <div class="mainpage container">
-{#if $isLoggedIn}
- <div class="profile">
-    <h4>Current Logged In user:</h4>
-    <img src={$user.photoURL} alt="profile" />
-    <p>Name :{$user.displayName}</p>
-    <p>email: {$user.email}</p>
- </div>
- {/if}
-
  <div class="showBlogs">
     {#each blogs as blog}
     <div class="blog">

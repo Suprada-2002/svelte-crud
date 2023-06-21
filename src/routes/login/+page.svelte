@@ -19,6 +19,7 @@
     }
 </script>
 
+<div class="container">
 <h1>login </h1>
 
 {#if $isLoggedIn}
@@ -32,4 +33,17 @@
  {:else}
  <button on:click={login}>Login Using Google</button>
  {/if}
+</div>
 
+<style>
+  .container {
+    display: grid;
+    place-items: center;
+  }
+
+  button {
+    padding: 5px 5px;
+    margin: 10px 0px;
+  }
+
+</style>
