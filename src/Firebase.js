@@ -3,14 +3,13 @@ import {getAuth, GoogleAuthProvider} from 'firebase/auth';
 import {getFirestore} from 'firebase/firestore';
 import { browser } from "$app/environment";
 
-console.log(import.meta.env.BASE_URL)
 const firebaseConfig = {
-  apiKey: "AIzaSyDm2CdqY_OSYLTkwKIWroFLQlbEWLxoRM8",
-  authDomain: "svelteblogapp.firebaseapp.com",
-  projectId: "svelteblogapp",
-  storageBucket: "svelteblogapp.appspot.com",
-  messagingSenderId: "955177790619",
-  appId: "1:955177790619:web:bdbfeb0eba38f03213ea3e"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGE_SENDER_ID,
+  appId: import.meta.env.VITE_API_ID
 };
 
 let app = initializeApp(firebaseConfig);
