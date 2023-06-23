@@ -2,12 +2,15 @@
      import {db} from '../../Firebase';
      import {onSnapshot, doc} from 'firebase/firestore';
      import {showBlogId} from '../../store'
+     import { parse } from "marked";
      
      let data =[];
     const docRef = doc(db, "blogs", $showBlogId);
     if($showBlogId != 0){
         onSnapshot(docRef, (doc) => {
-            data = doc.data();
+            const temp = doc.data();
+            temp.content = parse(temp.content);
+            data = temp;
         })
        $showBlogId = 0;
     }

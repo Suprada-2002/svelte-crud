@@ -8,7 +8,6 @@
     updateDoc,
   } from "firebase/firestore";
   import { goto } from '$app/navigation';
-  import { parse } from "marked";
 
   let blog = {
     id:"",
@@ -29,8 +28,6 @@
         alert("add some content !!");
         return;
     }
-    // parsing html content
-    blog.content = parse(blog.content);
 
     if($isEditable){
         updateBlog();
