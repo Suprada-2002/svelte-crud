@@ -16,7 +16,7 @@
 <div class="container">
     <div class="content">
         <h3>{data.title}</h3>
-        <p>{data.content}</p>
+        <p>{@html data.content}</p>
     </div>
 </div>
 
