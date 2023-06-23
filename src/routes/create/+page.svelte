@@ -70,6 +70,7 @@
 </script>
 
 <div class="form-content container">
+    <i>The Content Supports .md file syntax. If you don't know about it, check <a href="https://www.markdownguide.org/basic-syntax/">this</a> out to understand basic syntax.</i>
     <form on:submit|preventDefault={handleSubmit} >
         <div class="firstInp">
             <label for="title" id="title" >Title</label>

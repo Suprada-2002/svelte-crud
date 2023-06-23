@@ -18,13 +18,18 @@
 
 <div class="container">
     <div class="content">
-        <h3>{data.title}</h3>
+        <h1>{data.title}</h1>
         <p>{@html data.content}</p>
     </div>
 </div>
 
 <style>
-    h3{
+    h1{
         padding: 10px 0px;
+        border-bottom: 1px dotted black;
+        margin-bottom: 10px;
+    }
+    .content{
+        padding: 20px 0px;  
     }
 </style>

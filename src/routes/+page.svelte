@@ -51,8 +51,10 @@
 <div class="mainpage container">
  <div class="showBlogs">
     {#each blogs as blog}
+   
     <div class="blog">
-      <h4
+      <ol>
+     <li><h4
        on:click={showFullBlog(blog.id)}
       >{blog.title}</h4>
       {#if $isLoggedIn}
@@ -60,8 +62,10 @@
         <button class="button" on:click={editData(blog)}>Edit</button>
         <button class="button" on:click={deleteBlog(blog.id)} >Delete</button>
       </div>
-      {/if}
+      {/if} </li>
+    </ol>
     </div>
+  
     {/each}
  </div>
 </div>
@@ -82,5 +86,8 @@
   .button{
     padding: 3px 5px;
     cursor: pointer;
+  }
+  li,ol{
+    margin:0px;
   }
  </style>
