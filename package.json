@@ -1,6 +1,7 @@
 {
 	"name": "svelte-crud",
 	"version": "0.0.1",
+  "description": "A guestbook made by me",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
